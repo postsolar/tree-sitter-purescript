@@ -1,4 +1,4 @@
-const {parens} = require('./util.js')
+const { parens, qualified, sep, sep1, where } = require('./util.js')
 
 module.exports = {
   // ------------------------------------------------------------------------

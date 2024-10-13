@@ -11,6 +11,7 @@ const class_ = require('./grammar/class.js')
 const decl = require('./grammar/decl.js')
 const derive = require('./grammar/derive.js')
 const pattern = require('./grammar/pattern.js')
+const { terminated } = require('./grammar/util.js')
 
 module.exports = grammar({
   name: 'purescript',
