@@ -1,6 +1,6 @@
-const { sep, parens, braces } = require('./util.js')
+import {sep, parens, braces} from './util.js';
 
-module.exports = {
+export default {
   /** Terminology:
    *
    * The left-hand side of a label/value or label/type pair is called "field name".
@@ -122,5 +122,5 @@ module.exports = {
       braces(sep($.comma, $._record_field_update))
     ),
 
-}
+};
 

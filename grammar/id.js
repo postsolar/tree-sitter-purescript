@@ -1,6 +1,6 @@
-const { parens, varid_pattern, qualified } = require('./util.js')
+import {parens, varid_pattern, qualified} from './util.js';
 
-module.exports = {
+export default {
   // ------------------------------------------------------------------------
   // Identifiers
   // ------------------------------------------------------------------------
@@ -105,4 +105,4 @@ module.exports = {
   literal: $ => $._literal,
   _name: $ => choice($._var, $._con),
   _qname: $ => choice($._qvar, $._qcon),
-}
+};

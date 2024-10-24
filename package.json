@@ -5,29 +5,22 @@
   "repository": "github:postsolar/tree-sitter-purescript",
   "license": "MIT",
   "main": "bindings/node",
+  "type": "module",
   "keywords": [
     "parsing",
     "incremental",
     "purescript"
   ],
   "dependencies": {
-    "nan": "^2.18.0"
+    "nan": "^2.22.0"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.21.0"
+    "tree-sitter-cli": "^0.24.3"
   },
   "scripts": {
     "build": "tree-sitter generate --no-bindings",
     "build-wasm": "tree-sitter build-wasm",
     "test": "tree-sitter test",
     "parse": "tree-sitter parse"
-  },
-  "tree-sitter": [
-    {
-      "scope": "source.purescript",
-      "injection-regex": "^(purs|purescript)$",
-      "file-types": [ "purs" ]
-    }
-  ]
+  }
 }
-

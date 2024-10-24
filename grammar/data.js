@@ -1,6 +1,6 @@
-const { sep1 } = require('./util.js')
+import {sep1} from './util.js';
 
-module.exports = {
+export default {
 
   // ----- Data ---------------------------------------------------------------
 
@@ -43,4 +43,4 @@ module.exports = {
     $.newtype_constructor,
   ),
 
-}
+};

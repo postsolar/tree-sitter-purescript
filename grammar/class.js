@@ -1,6 +1,6 @@
-const { parens, sep1, where } = require("./util");
+import { parens, sep1, where } from "./util.js";
 
-module.exports = {
+export default {
 
   // ----- Shared -------------------------------------------------------------
 
@@ -82,4 +82,4 @@ module.exports = {
       optional(where($, $._idecl))
     ),
 
-}
+};

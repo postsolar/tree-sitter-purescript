@@ -1,6 +1,6 @@
-const { layouted } = require('./util')
+import { layouted } from './util.js';
 
-module.exports = {
+export default {
   // ------------------------------------------------------------------------
   // Declarations
   // ------------------------------------------------------------------------
@@ -116,4 +116,4 @@ module.exports = {
       $._type_annotation
     ),
 
-}
+};

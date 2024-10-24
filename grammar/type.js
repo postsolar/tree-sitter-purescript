@@ -1,6 +1,6 @@
-const { parens, qualified } = require('./util.js')
+import {parens, qualified} from './util.js';
 
-module.exports = {
+export default {
 
   // ----- Type variables -----------------------------------------------------
 
@@ -154,4 +154,4 @@ module.exports = {
       '=',
       $._type
     ),
-}
+};

@@ -1,6 +1,6 @@
-const { parens, qualified, sep, sep1, where } = require('./util.js')
+import {parens, qualified, sep, sep1, where} from './util.js';
 
-module.exports = {
+export default {
   // ------------------------------------------------------------------------
   // module
   // ------------------------------------------------------------------------
@@ -32,4 +32,4 @@ module.exports = {
     field('exports', optional($.exports)),
     where($, $._topdecl),
   ),
-}
+};

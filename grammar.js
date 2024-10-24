@@ -1,19 +1,19 @@
-const basic = require('./grammar/basic.js')
-const id = require('./grammar/id.js')
-const rows = require('./grammar/rows_and_records.js')
-const type = require('./grammar/type.js')
-const exp = require('./grammar/exp.js')
-const pat = require('./grammar/pat.js')
-const import_ = require('./grammar/import.js')
-const module_ = require('./grammar/module.js')
-const data = require('./grammar/data.js')
-const class_ = require('./grammar/class.js')
-const decl = require('./grammar/decl.js')
-const derive = require('./grammar/derive.js')
-const pattern = require('./grammar/pattern.js')
-const { terminated } = require('./grammar/util.js')
+import basic from './grammar/basic.js';
+import id from './grammar/id.js';
+import rows from './grammar/rows_and_records.js';
+import type from './grammar/type.js';
+import exp from './grammar/exp.js';
+import pat from './grammar/pat.js';
+import import_ from './grammar/import.js';
+import module_ from './grammar/module.js';
+import data from './grammar/data.js';
+import class_ from './grammar/class.js';
+import decl from './grammar/decl.js';
+import derive from './grammar/derive.js';
+import pattern from './grammar/pattern.js';
+import { terminated } from './grammar/util.js';
 
-module.exports = grammar({
+export default grammar({
   name: 'purescript',
 
   /**

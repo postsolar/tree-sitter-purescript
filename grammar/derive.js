@@ -1,4 +1,4 @@
-module.exports = {
+export default {
 // possible types of deriving declarations:
 // derive instance Eq (Id a)
 // derive instance Eq a => Eq (Id a)
@@ -23,4 +23,4 @@ module.exports = {
     repeat($._atype)
   )),
 
-}
+};
