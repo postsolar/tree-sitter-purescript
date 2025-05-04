@@ -1,9 +1,9 @@
-const { parens, braces } = require('./util.js')
+const { sep, parens, braces } = require('./util.js')
 
 module.exports = {
   /** Terminology:
    *
-   * The left-hand side of a label/value or label/type pair is called "field name". 
+   * The left-hand side of a label/value or label/type pair is called "field name".
    * The right-hand side of a label/value or label/type pair is called "field value" or "field type", respectively.
    * A pair of any type itself is called a "field".
    *   - But a record pun is also a field even though the field value for them is implicit.
