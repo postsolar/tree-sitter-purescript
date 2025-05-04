@@ -5638,6 +5638,7 @@
   {
     "type": "purescript",
     "named": true,
+    "root": true,
     "fields": {
       "exports": {
         "multiple": false,
@@ -6516,11 +6517,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "tycon_arrow",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "type",

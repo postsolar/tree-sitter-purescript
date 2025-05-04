@@ -1,4 +1,14 @@
-const { brackets, layouted, layouted_without_end, parens, qualified, sep, sep1, ticked, terminated } = require('./util.js')
+import {
+  brackets,
+  layouted,
+  layouted_without_end,
+  parens,
+  qualified,
+  sep,
+  sep1,
+  ticked,
+  terminated,
+} from './util.js';
 
 /* ----- Composite expressions shared between do/ado and regular notation -----
 
@@ -26,7 +36,7 @@ const __lexp = ($, ...rule) =>
     ...rule
   )
 
-module.exports = {
+export default {
 
   // ----- Identifiers and modifiers ------------------------------------------
 
@@ -313,4 +323,4 @@ module.exports = {
    * here the type annotation binds to `x`, not the entire expression
    */
   _exp: $ => prec.right(seq($._exp_infix, optional($._type_annotation))),
-}
+};

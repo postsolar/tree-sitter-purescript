@@ -1,6 +1,6 @@
-const { parens, sep1, qualified } = require('./util.js')
+import {parens, sep1, qualified} from './util.js';
 
-module.exports = {
+export default {
   // ------------------------------------------------------------------------
   // import
   // ------------------------------------------------------------------------
@@ -45,4 +45,4 @@ module.exports = {
       optional(seq('as', choice($._modid, qualified($, $._modid))))
     ),
   ),
-}
+};

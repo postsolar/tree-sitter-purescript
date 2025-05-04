@@ -42,11 +42,17 @@
             {
               default = pkgs.mkShell {
                 name = "tree-sitter-purescript devshell";
+
+                # use tree-sitter from npm (more up to date)
+                shellHook = ''
+                  export PATH=$PWD/node_modules/.bin:$PATH
+                '';
+
                 buildInputs = [
                   # Tree-sitter tools
                   pkgs.nodejs
                   # NOTE as of b71a98a on Nixpkgs, TS fails to build with `webUISupport` flag
-                  pkgs.tree-sitter
+                  # pkgs.tree-sitter
 
                   # For dev workflow automation
                   pkgs.watchexec

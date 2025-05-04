@@ -1,6 +1,6 @@
-const { braces, brackets, parens, sep } = require('./util.js')
+import {braces, brackets, parens, sep} from './util.js';
 
-module.exports = {
+export default {
 
   pat_field: $ =>
     seq(
@@ -68,4 +68,4 @@ module.exports = {
     $.pat_typed,
   ),
 
-}
+};

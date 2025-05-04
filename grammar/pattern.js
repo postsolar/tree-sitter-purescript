@@ -1,6 +1,6 @@
-const { layouted } = require('./util.js')
+import {layouted} from './util.js';
 
-module.exports = {
+export default {
   // ------------------------------------------------------------------------
   // pattern synonym
   // ------------------------------------------------------------------------
@@ -39,4 +39,4 @@ module.exports = {
       alias($._pattern_arrow, $.equation),
     ),
   ),
-}
+};
