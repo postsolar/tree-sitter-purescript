@@ -510,8 +510,6 @@ static bool valid_symop_two_chars(uint32_t first_char, uint32_t second_char) {
       return second_char != '>';
     case '<':
       return second_char != '-';
-    case '.':
-      return second_char != '.';
     case ':':
       return second_char != ':';
     default:

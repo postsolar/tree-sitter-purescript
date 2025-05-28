@@ -250,3 +250,21 @@ f = (pure `identity bind` _)
           (exp_name
             (variable))))
       (wildcard))))
+
+================================================================================
+dotdot is a valid operator
+================================================================================
+
+f = 1 .. 2
+
+--------------------------------------------------------------------------------
+
+(purescript
+  (function
+    (variable)
+    (exp_infix
+      (exp_literal
+        (integer))
+      (operator)
+      (exp_literal
+        (integer)))))
