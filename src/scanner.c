@@ -1173,26 +1173,16 @@ static Result multiline_comment_success(State *state) {
 /**
  * See `nested_comment`.
  *
- * Since {- -} comments can be nested arbitrarily, this has to keep track of how many have been openend, so that the
- * outermost comment isn't closed prematurely.
+ * Since {- -} comments cannot be nested arbitrarily (unlike Haskell), we can get very greedy.
  */
 static Result multiline_comment(State *state) {
-  uint16_t level = 0;
   for (;;) {
     switch (PEEK) {
-      case '{':
-        S_ADVANCE;
-        if (PEEK == '-') {
-          S_ADVANCE;
-          level++;
-        }
-        break;
       case '-':
         S_ADVANCE;
         if (PEEK == '}') {
           S_ADVANCE;
-          if (level == 0) return multiline_comment_success(state);
-          level--;
+          return multiline_comment_success(state);
         }
         break;
       case 0: {
@@ -1208,7 +1198,7 @@ static Result multiline_comment(State *state) {
 }
 
 /**
- * When a brace is encountered, it can be an explicitly started layout, a pragma, or a comment. In the latter case, the
+ * When a brace is encountered, it can be an explicitly started layout, or a comment. In the latter case, the
  * comment is parsed, otherwise parsing fails to delegate to the corresponding grammar rule.
  */
 static Result brace(State *state) {
@@ -1216,7 +1206,6 @@ static Result brace(State *state) {
   S_ADVANCE;
   if (PEEK != '-') return res_fail;
   S_ADVANCE;
-  if (PEEK == '#') return res_fail;
   return multiline_comment(state);
 }
 
