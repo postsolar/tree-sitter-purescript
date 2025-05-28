@@ -51,7 +51,7 @@ module A (fun1, fun2, Ctor(..), (+)) where
         (all_names)))
     (comma)
     (export
-      (type_operator)))
+      (operator)))
   (where))
 
 ================================================================================
@@ -98,8 +98,8 @@ import F (fun3) as F
             (all_names))))
       (comma)
       (import_item
-        (type_import
-          (type_operator)))))
+        (var_import
+          (operator)))))
   (import
     module: (qualified_module
       (module))
@@ -187,8 +187,8 @@ import B hiding ()
             (type))))
       (comma)
       (import_item
-        (type_import
-          (type_operator)))
+        (var_import
+          (operator)))
       (comma)
       (import_item
         (type_operator_import
@@ -231,4 +231,3 @@ import D.E.F.G (h)
       (import_item
         (var_import
           (variable))))))
-

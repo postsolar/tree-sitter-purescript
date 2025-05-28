@@ -74,21 +74,21 @@
  *   - end: End an implicit layout, in place of a closing brace
  *   - dot: For qualified modules `Data.List.null`, which have to be disambiguated from the `(.)` operator based on
  *     surrounding whitespace.
- *   - arith_dotdot: The two dots in an arithmetic sequence, since both module dots and projection dots are valid here.
+ *   - arith_dotdot: LEGACY HASKELL
  *   - where: Parse an inline `where` token. This is necessary because `where` tokens can end layouts and it's necesary
  *     to know whether it is valid at that position, which can mean that it belongs to the last statement of the layout
  *   - splice: LEGACY HASKELL
- *   - varsym: A symbolic operator
- *   - consym: A symbolic constructor
- *   - tyconsym: A symbolic type operator
+ *   - varsym: LEGACY HASKELL
+ *   - consym: LEGACY HASKELL
+ *   - tyconsym: LEGACY HASKELL
  *   - comment: A line or block comment, because they interfere with operators, especially in QQs
- *   - cpp: A preprocessor directive. Needs to push and pop indent stacks
+ *   - cpp: LEGACY HASKELL
  *   - comma: Needed to terminate inline layouts like `of`, `do`
  *   - qq_start: LEGACY HASKELL
  *   - qq_bar: LEGACY HASKELL
  *   - qq_body: LEGACY HASKELL
- *   - strict: Disambiguate strictness annotation `!` from symbolic operators
- *   - lazy: Disambiguate laziness annotation `~` from symbolic operators
+ *   - strict: LEGACY HASKELL
+ *   - lazy: LEGACY HASKELL
  *   - unboxed_close: LEGACY HASKELL
  *   - bar: The vertical bar `|`, used for guards and list comprehension
  *   - in: Closes the layout of a `let` and consumes the token `in`
@@ -301,8 +301,6 @@ static bool varid_char(const uint32_t c) {
       return iswalnum(c);
   }
 }
-
-static bool quoter_char(const uint32_t c) { return varid_char(c) || c == '.'; };
 
 static bool seq(const char * restrict s, State *state) {
   size_t len = strlen(s);
@@ -522,31 +520,23 @@ static  bool valid_splice(State *state) {
 }
 
 typedef enum {
-  S_CON,
   S_OP,
-  S_STRICT,
-  S_LAZY,
   S_STAR,
   S_TILDE,
   S_IMPLICIT,
-  S_MODIFIER,
-  S_MINUS,
   S_BAR,
   S_COMMENT,
   S_INVALID,
 } Symbolic;
 
-static Symbolic con_or_var(uint32_t c) { return c == ':' ? S_CON : S_OP; }
-
 /**
  * Symbolic operators that are eligible to close a layout when they are on a newline with less/eq indent.
  *
- * Very crude heuristic. Layouts bad.
+ * Very crude heuristic. Layouts bad. Very bad.
  */
 static bool expression_op(Symbolic type) {
   switch (type) {
     case S_OP:
-    case S_CON:
     case S_STAR:
       return true;
     default:
@@ -574,25 +564,20 @@ static Symbolic s_symop(wchar_vec s, State *state) {
   if (s.data == NULL || s.data[0] == 0) return S_INVALID;
   int32_t c = s.data[0];
   if (s.len == 1) {
-    if (c == '!' && !(isws(PEEK) || PEEK == ')')) return S_STRICT;
-    if (c == '~' && !(isws(PEEK) || PEEK == ')')) return S_LAZY;
     if (c == '#' && varid_start_char(PEEK)) return S_INVALID;
     if (c == '?' && varid_start_char(PEEK)) return S_IMPLICIT;
-    if (c == '%' && !(isws(PEEK) || PEEK == ')')) return S_MODIFIER;
     if (c == '|') return S_BAR;
-    if (c == '.' &&  !(isws(PEEK) || PEEK == ')')) return S_INVALID;
     switch (c) {
       case '*':
         return S_STAR;
       case '~':
         return S_TILDE;
-      case '-':
-        return S_MINUS;
+      case '.':
       case '=':
       case '@':
       case '\\':
         return S_INVALID;
-      default: return con_or_var(c);
+      default: return S_OP;
     }
   } else {
     bool is_comment = (s.data[0] == '-') && (s.data[1] == '-');
@@ -601,7 +586,7 @@ static Symbolic s_symop(wchar_vec s, State *state) {
       if (!valid_symop_two_chars(s.data[0], s.data[1])) return S_INVALID;
     }
   }
-  return con_or_var(c);
+  return S_OP;
 }
 
 // --------------------------------------------------------------------------------------------------------
@@ -791,92 +776,16 @@ static Result initialize_init(State *state) {
   return res_cont;
 }
 
-/**
- * If a dot is neither preceded nor succeeded by whitespace, it may be parsed as a qualified module dot or a field
- * projection.
- *
- * The preceding space is ensured by sequencing this parser before `skipspace` in `init`.
- * Since this parser cannot look back to see whether the preceding name is a conid, this has to be ensured by the
- * grammar, represented here by the requirement of a valid symbol `DOT`.
- *
- * Since the dot is consumed here, the alternative interpretation, a `VARSYM`, has to be emitted here.
- * A `TYCONSYM` is invalid here, because the dot is only expected in expressions.
- *
- * In arithmetic sequences, the initial expression may be followed by module dots and projection dots as well as the two
- * dots that denote the sequence, so the latter have to be disambiguated here as well.
- */
 static Result dot(State *state) {
-  if (SYM(DOT) || SYM(ARITH_DOTDOT)) {
-    if (PEEK == '.') {
-      S_ADVANCE;
-      if (SYM(VARSYM) && (iswspace(PEEK))) return finish(VARSYM, "dot");
-      MARK("dot", false, state);
-      if (SYM(ARITH_DOTDOT) && PEEK == '.') {
-        S_ADVANCE;
-        if (!symbolic(PEEK)) {
-          MARK("dot", false, state);
-          return finish(ARITH_DOTDOT, "dot");
-        }
-      }
-      else if (SYM(DOT)) return finish(DOT, "dot");
-    }
-  }
-  return res_cont;
-}
-
-
-/**
- * Consume the body of a cpp directive.
- *
- * Since they can contain escaped newlines, they have to be consumed, after which the parser recurses.
- */
-static void cpp_consume(State *state) {
-  for (;;) {
-    while (PEEK != 0 && !is_newline(PEEK) && PEEK != '\\') S_ADVANCE;
-    if (PEEK == '\\') {
-      S_ADVANCE;
-      S_ADVANCE;
-      continue;
-    }
-    return;
-  }
-}
-
-
-/**
- * Parse a cpp directive.
- *
- * This is a workaround for the problem described in `cpp`. It will simply consume all code between `#else` or `#elif`
- * and `#endif`.
- */
-static Result cpp_workaround(State *state) {
-  if (PEEK == '#') {
+  if (SYM(DOT) && PEEK == '.') {
     S_ADVANCE;
-    if (seq("el", state)) {
-      consume_until("#endif", state);
-      if (PEEK == 0) {
-        Result res = eof(state);
-        SHORT_SCANNER;
-        return res_fail;
-      }
-      return finish(CPP, "cpp-else");
-    }
-    cpp_consume(state);
-    MARK("cpp_workaround", false, state);
-    return finish(CPP, "cpp");
+    MARK("dot", false, state);
+    if (SYM(DOT)) return finish(DOT, "dot");
   }
   return res_cont;
 }
 
-/**
- * If the current column is 0, a cpp directive may begin.
- */
-static Result cpp(State *state) {
-  if (column(state) == 0) {
-    return cpp_workaround(state);
-  }
-  return res_cont;
-}
+
 
 /**
  * End a layout by removing an indentation from the stack, but only if the current column (which should be in the next
@@ -1011,27 +920,11 @@ static Result symop_marked(Symbolic type, State *state) {
     case S_INVALID:
       return res_fail;
     case S_STAR:
-    case S_MODIFIER:
-      return SYM(TYCONSYM) ? res_fail : res_cont;
     case S_TILDE:
-    case S_MINUS: {
-      Result res = finish_if_valid(TYCONSYM, "symop", state);
-      SHORT_SCANNER;
-      return res_fail;
-    }
     case S_IMPLICIT:
       return res_fail;
-    case S_LAZY:
-      return finish_if_valid(LAZY, "lazy", state);
-    case S_STRICT:
-      return finish_if_valid(STRICT, "strict", state);
     case S_COMMENT:
       return inline_comment(state);
-    case S_CON: {
-      Result res = finish_if_valid(CONSYM, "symop", state);
-      SHORT_SCANNER;
-      return res_fail;
-    }
     default:
       return res_cont;
   }
@@ -1042,14 +935,7 @@ static Result symop_marked(Symbolic type, State *state) {
  *
  *  - Star, tilde and minus are only valid as type operators
  *  - Implicit `?` with immediate varid is always invalid, to be parsed by the grammar
- *  - `$` with immediate varid or parens is a splice
- *  - `!` can be a strictness annotation
- *  - `%` can be a modifier TODO currently only checked for types
- *  - /--+/ is a comment
- *  - `#)` is an unboxed tuple terminator
- *  - Leadering `:` is a `CONSYM`
  *
- * Otherwise succeed with `TYCONSYM` or `VARSYM` if they are valid.
  */
 
 static Result symop(Symbolic type, State *state) {
@@ -1065,10 +951,10 @@ static Result symop(Symbolic type, State *state) {
   MARK("symop", false, state);
   Result res = symop_marked(type, state);
   SHORT_SCANNER;
-  res = finish_if_valid(TYCONSYM, "symop", state);
-  SHORT_SCANNER;
-  res = finish_if_valid(VARSYM, "symop", state);
-  SHORT_SCANNER;
+  // res = finish_if_valid(TYCONSYM, "symop", state);
+  // SHORT_SCANNER;
+  // res = finish_if_valid(VARSYM, "symop", state);
+  // SHORT_SCANNER;
   return res_fail;
 }
 
@@ -1341,8 +1227,6 @@ static Result newline(uint32_t indent, State *state) {
   SHORT_SCANNER;
   res = initialize(indent, state);
   SHORT_SCANNER;
-  res = cpp(state);
-  SHORT_SCANNER;
   res = comment(state);
   SHORT_SCANNER;
   res = newline_token(indent, state);
@@ -1375,7 +1259,6 @@ static Result immediate(uint32_t column, State *state) {
  *   - Error check
  *   - Indent stack initialization
  *   - Qualified module dot (leading whitespace would mean it would be `(.)`)
- *   - cpp
  */
 static Result init(State *state) {
   Result res = eof(state);
@@ -1385,8 +1268,6 @@ static Result init(State *state) {
   res = initialize_init(state);
   SHORT_SCANNER;
   res = dot(state);
-  SHORT_SCANNER;
-  res = cpp(state);
   SHORT_SCANNER;
   return res_cont;
 }
