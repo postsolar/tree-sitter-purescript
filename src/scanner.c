@@ -535,7 +535,6 @@ typedef enum {
   S_IMPLICIT,
   S_MODIFIER,
   S_MINUS,
-  S_UNBOXED_TUPLE_CLOSE,
   S_BAR,
   S_COMMENT,
   S_INVALID,
@@ -581,7 +580,6 @@ static Symbolic s_symop(wchar_vec s, State *state) {
   if (s.len == 1) {
     if (c == '!' && !(isws(PEEK) || PEEK == ')')) return S_STRICT;
     if (c == '~' && !(isws(PEEK) || PEEK == ')')) return S_LAZY;
-    if (c == '#' && PEEK == ')') return S_UNBOXED_TUPLE_CLOSE;
     if (c == '#' && varid_start_char(PEEK)) return S_INVALID;
     if (c == '$' && valid_splice(state)) return S_SPLICE;
     if (c == '?' && varid_start_char(PEEK)) return S_IMPLICIT;
@@ -1032,16 +1030,7 @@ static Result splice(State *state) {
   return res_cont;
 }
 
-static Result unboxed_close(State *state) {
-  if (state->symbols[UNBOXED_TUPLE_CLOSE]) {
-    if (PEEK == ')') {
-      S_ADVANCE;
-      MARK("unboxed_close", false, state);
-      return finish(UNBOXED_TUPLE_CLOSE, "unboxed_close");
-    }
-  }
-  return res_cont;
-}
+
 
 
 /**
@@ -1104,8 +1093,6 @@ static Result symop_marked(Symbolic type, State *state) {
       SHORT_SCANNER;
       return res_fail;
     }
-    case S_UNBOXED_TUPLE_CLOSE:
-      return unboxed_close(state);
     default:
       return res_cont;
   }

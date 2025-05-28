@@ -387,19 +387,18 @@ e = ( ado
   (qualified_module
     (module))
   (where)
-  (ERROR
-    (function
-      (variable)
-      (exp_parens
-        (exp_ado
-          (statement
-            (bind_pattern
-              (pat_name
-                (variable))
-              (exp_name
-                (variable))))
-          (exp_name
-            (variable))))))
+  (function
+    (variable)
+    (exp_parens
+      (exp_ado
+        (statement
+          (bind_pattern
+            (pat_name
+              (variable))
+            (exp_name
+              (variable))))
+        (exp_name
+          (variable)))))
   (function
     (variable)
     (exp_parens
