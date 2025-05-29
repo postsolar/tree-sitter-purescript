@@ -41,6 +41,8 @@ module.exports = grammar({
     $._tyconsym,
     $.comment,
     $.comma,
+    '@',
+    '=',
     '|',
     'in',
     /\n/,

@@ -74,10 +74,8 @@
  *   - end: End an implicit layout, in place of a closing brace
  *   - dot: For qualified modules `Data.List.null`, which have to be disambiguated from the `(.)` operator based on
  *     surrounding whitespace.
- *   - arith_dotdot: LEGACY HASKELL
  *   - where: Parse an inline `where` token. This is necessary because `where` tokens can end layouts and it's necesary
  *     to know whether it is valid at that position, which can mean that it belongs to the last statement of the layout
- *   - tyconsym: LEGACY HASKELL
  *   - comment: A line or block comment, because they interfere with operators, especially in QQs
  *   - comma: Needed to terminate inline layouts like `of`, `do`
  *   - bar: The vertical bar `|`, used for guards and list comprehension
@@ -96,6 +94,8 @@ typedef enum {
   TYCONSYM,
   COMMENT,
   COMMA,
+  ATSIGN,
+  EQUALS,
   BAR,
   IN,
   INDENT,
@@ -112,6 +112,8 @@ static char *sym_names[] = {
   "where",
   "comment",
   "comma",
+  "atsign",
+  "equals",
   "bar",
   "in",
   "indent",
@@ -490,6 +492,8 @@ typedef enum {
   S_OP,
   S_STAR,
   S_TILDE,
+  S_EQUALS,
+  S_ATSIGN,
   S_IMPLICIT,
   S_BAR,
   S_COMMENT,
@@ -539,9 +543,11 @@ static Symbolic s_symop(wchar_vec s, State *state) {
         return S_STAR;
       case '~':
         return S_TILDE;
-      case '.':
       case '=':
+        return S_EQUALS;
       case '@':
+        return S_ATSIGN;
+      case '.':
       case '\\':
         return S_INVALID;
       default: return S_OP;
@@ -890,6 +896,10 @@ static Result symop_marked(Symbolic type, State *state) {
     case S_TILDE:
     case S_IMPLICIT:
       return res_fail;
+    case S_ATSIGN:
+      return finish(ATSIGN, "atsign");
+    case S_EQUALS:
+      return finish(EQUALS, "equals");
     case S_COMMENT:
       return inline_comment(state);
     default:
