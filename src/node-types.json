@@ -713,11 +713,6 @@
     "fields": {}
   },
   {
-    "type": "constructor_operator",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "data",
     "named": true,
     "fields": {
@@ -2611,19 +2606,11 @@
           "named": true
         },
         {
-          "type": "constructor_operator",
-          "named": true
-        },
-        {
           "type": "operator",
           "named": true
         },
         {
           "type": "qualified_constructor",
-          "named": true
-        },
-        {
-          "type": "qualified_constructor_operator",
           "named": true
         },
         {
@@ -3277,19 +3264,11 @@
           "named": true
         },
         {
-          "type": "constructor_operator",
-          "named": true
-        },
-        {
           "type": "export_names",
           "named": true
         },
         {
           "type": "operator",
-          "named": true
-        },
-        {
-          "type": "qualified_constructor_operator",
           "named": true
         },
         {
@@ -3341,10 +3320,6 @@
         },
         {
           "type": "constructor",
-          "named": true
-        },
-        {
-          "type": "constructor_operator",
           "named": true
         },
         {
@@ -4369,10 +4344,6 @@
           "named": true
         },
         {
-          "type": "constructor_operator",
-          "named": true
-        },
-        {
           "type": "operator",
           "named": true
         },
@@ -5193,19 +5164,11 @@
           "named": true
         },
         {
-          "type": "constructor_operator",
-          "named": true
-        },
-        {
           "type": "operator",
           "named": true
         },
         {
           "type": "qualified_constructor",
-          "named": true
-        },
-        {
-          "type": "qualified_constructor_operator",
           "named": true
         },
         {
@@ -5638,6 +5601,7 @@
   {
     "type": "purescript",
     "named": true,
+    "root": true,
     "fields": {
       "exports": {
         "multiple": false,
@@ -5745,25 +5709,6 @@
       "types": [
         {
           "type": "constructor",
-          "named": true
-        },
-        {
-          "type": "module",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "qualified_constructor_operator",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "constructor_operator",
           "named": true
         },
         {
@@ -6332,10 +6277,6 @@
           "named": true
         },
         {
-          "type": "constructor_operator",
-          "named": true
-        },
-        {
           "type": "forall",
           "named": true
         },
@@ -6518,11 +6459,6 @@
     }
   },
   {
-    "type": "tycon_arrow",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "type",
     "named": true,
     "fields": {}
@@ -6656,10 +6592,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "constructor_operator",
-          "named": true
-        },
         {
           "type": "import_con_names",
           "named": true
@@ -7094,11 +7026,8 @@
   },
   {
     "type": "comment",
-    "named": true
-  },
-  {
-    "type": "cpp",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "data",

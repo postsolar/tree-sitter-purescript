@@ -48,22 +48,15 @@ module.exports = {
   // Qualified or unqualified data constructor.
   _qconid: $ => choice($.qualified_constructor, $.constructor),
 
-  // TODO: should be deleted?
-  // `_consym` comes from the scanner.
-  constructor_operator: $ => $._consym,
-  qualified_constructor_operator: $ => qualified($, $.constructor_operator),
-  // Qualified or unqualified constructor operator
-  _qconsym: $ => choice($.qualified_constructor_operator, $.constructor_operator),
+  // Data constructor
+  _con: $ => $.constructor,
+  // Qualified data constructor
+  _qcon: $ => $._qconid,
 
-  // Data constructor in "normal" or infix operator form (in parens).
-  _con: $ => choice($.constructor, parens($.constructor_operator)),
-  // Qualified data constructor in "normal" or infix operator form (in parens).
-  _qcon: $ => choice($._qconid, parens($._qconsym)),
-
-  // Data constructor in "normal" or infix operator form (in parens).
-  _con: $ => choice($.constructor, parens($.constructor_operator)),
-  // Qualified data constructor in "normal" or infix operator form (in parens).
-  _qcon: $ => choice($._qconid, parens($._qconsym)),
+  // Data constructor
+  _con: $ => $.constructor,
+  // Qualified data constructor
+  _qcon: $ => $._qconid,
 
   // ------------------------------------------------------------------------
   // Type constructors
@@ -74,10 +67,10 @@ module.exports = {
   _qtyconid: $ => choice($.qualified_type, $._tyconid),
 
   // `_tyconsym` comes from the scanner.
-  _type_operator: $ => choice(alias($._tyconsym, $.type_operator), $.constructor_operator),
+  _type_operator: $ => alias($._tyconsym, $.type_operator),
   qualified_type_operator: $ => qualified($, alias($._tyconsym, $.type_operator)),
 
-  _qualified_type_operator: $ => choice($.qualified_type_operator, $.qualified_constructor_operator),
+  _qualified_type_operator: $ => $.qualified_type_operator,
   _qtyconsym: $ => choice($._qualified_type_operator, $._type_operator),
 
   _simple_tycon: $ => choice($._tyconid, parens($._type_operator)),

@@ -77,19 +77,9 @@
  *   - arith_dotdot: LEGACY HASKELL
  *   - where: Parse an inline `where` token. This is necessary because `where` tokens can end layouts and it's necesary
  *     to know whether it is valid at that position, which can mean that it belongs to the last statement of the layout
- *   - splice: LEGACY HASKELL
- *   - varsym: LEGACY HASKELL
- *   - consym: LEGACY HASKELL
  *   - tyconsym: LEGACY HASKELL
  *   - comment: A line or block comment, because they interfere with operators, especially in QQs
- *   - cpp: LEGACY HASKELL
  *   - comma: Needed to terminate inline layouts like `of`, `do`
- *   - qq_start: LEGACY HASKELL
- *   - qq_bar: LEGACY HASKELL
- *   - qq_body: LEGACY HASKELL
- *   - strict: LEGACY HASKELL
- *   - lazy: LEGACY HASKELL
- *   - unboxed_close: LEGACY HASKELL
  *   - bar: The vertical bar `|`, used for guards and list comprehension
  *   - in: Closes the layout of a `let` and consumes the token `in`
  *   - indent: Used as a dummy symbol for initialization; uses newline in the grammar to ensure the scanner is called
@@ -102,21 +92,10 @@ typedef enum {
   START,
   END,
   DOT,
-  ARITH_DOTDOT,
   WHERE,
-  SPLICE,
-  VARSYM,
-  CONSYM,
   TYCONSYM,
   COMMENT,
-  CPP,
   COMMA,
-  QQ_START,
-  QQ_BAR,
-  QQ_BODY,
-  STRICT,
-  LAZY,
-  UNBOXED_TUPLE_CLOSE,
   BAR,
   IN,
   INDENT,
@@ -130,21 +109,9 @@ static char *sym_names[] = {
   "start",
   "end",
   "dot",
-  "arith_dot",
   "where",
-  "splice",
-  "varsym",
-  "consym",
-  "tyconsym",
   "comment",
-  "cpp",
   "comma",
-  "qq_start",
-  "qq_bar",
-  "qq_body",
-  "strict",
-  "lazy",
-  "unboxed_close",
   "bar",
   "in",
   "indent",

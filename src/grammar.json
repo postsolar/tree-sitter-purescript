@@ -1,4 +1,5 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "purescript",
   "word": "_varid",
   "rules": {
@@ -653,87 +654,13 @@
         }
       ]
     },
-    "constructor_operator": {
-      "type": "SYMBOL",
-      "name": "_consym"
-    },
-    "qualified_constructor_operator": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_qualifying_module"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "constructor_operator"
-        }
-      ]
-    },
-    "_qconsym": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "qualified_constructor_operator"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "constructor_operator"
-        }
-      ]
-    },
     "_con": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "constructor"
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "("
-            },
-            {
-              "type": "SYMBOL",
-              "name": "constructor_operator"
-            },
-            {
-              "type": "STRING",
-              "value": ")"
-            }
-          ]
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "constructor"
     },
     "_qcon": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_qconid"
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "("
-            },
-            {
-              "type": "SYMBOL",
-              "name": "_qconsym"
-            },
-            {
-              "type": "STRING",
-              "value": ")"
-            }
-          ]
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "_qconid"
     },
     "_tyconid": {
       "type": "ALIAS",
@@ -771,22 +698,13 @@
       ]
     },
     "_type_operator": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_tyconsym"
-          },
-          "named": true,
-          "value": "type_operator"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "constructor_operator"
-        }
-      ]
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_tyconsym"
+      },
+      "named": true,
+      "value": "type_operator"
     },
     "qualified_type_operator": {
       "type": "SEQ",
@@ -802,17 +720,8 @@
       ]
     },
     "_qualified_type_operator": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "qualified_type_operator"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "qualified_constructor_operator"
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "qualified_type_operator"
     },
     "_qtyconsym": {
       "type": "CHOICE",
@@ -6197,10 +6106,6 @@
     },
     {
       "type": "SYMBOL",
-      "name": "cpp"
-    },
-    {
-      "type": "SYMBOL",
       "name": "comment"
     }
   ],
@@ -6344,23 +6249,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "_arith_dotdot"
-    },
-    {
-      "type": "SYMBOL",
       "name": "where"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "_splice_dollar"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "_varsym"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "_consym"
     },
     {
       "type": "SYMBOL",
@@ -6372,35 +6261,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "cpp"
-    },
-    {
-      "type": "SYMBOL",
       "name": "comma"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "quasiquote_start"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "quasiquote_bar"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "quasiquote_body"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "_strict"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "_lazy"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "_unboxed_close"
     },
     {
       "type": "STRING",
@@ -6426,7 +6287,6 @@
     "_qvar",
     "_tyvar",
     "_qconid",
-    "_qconsym",
     "_con",
     "_tyconid",
     "_qtyconid",
@@ -6438,5 +6298,6 @@
     "_quantifiers",
     "_qualifying_module"
   ],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {}
 }
