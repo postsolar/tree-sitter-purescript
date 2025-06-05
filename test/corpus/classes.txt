@@ -207,6 +207,48 @@ class A b c d | b c -> d, c d -> b, b d -> c where
               (type_variable))))))))
 
 ================================================================================
+Class with fundeps determined
+================================================================================
+
+class A b c d | -> b, -> c, -> d where
+  a :: b -> Tuple c d
+
+--------------------------------------------------------------------------------
+
+(purescript
+  (class_declaration
+    (class_head
+      (class_name
+        (type))
+      (type_variable)
+      (type_variable)
+      (type_variable)
+      (fundeps
+        (fundep
+          (type_variable))
+        (comma)
+        (fundep
+          (type_variable))
+        (comma)
+        (fundep
+          (type_variable))))
+    (class_body
+      (where)
+      (signature
+        (variable)
+        (type_infix
+          (type_name
+            (type_variable))
+          (type_operator)
+          (type_apply
+            (type_name
+              (type))
+            (type_name
+              (type_variable))
+            (type_name
+              (type_variable))))))))
+
+================================================================================
 Class and instance - no parens in superclass
 ================================================================================
 
