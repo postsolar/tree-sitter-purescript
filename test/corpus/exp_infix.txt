@@ -277,12 +277,13 @@ f = 1 = 2
 
 --------------------------------------------------------------------------------
 
+
 (purescript
   (function
     (variable)
-    (exp_infix
+    (exp_apply
       (exp_literal
         (integer))
-      (operator)
+      (ERROR)
       (exp_literal
         (integer)))))
