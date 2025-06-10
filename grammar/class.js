@@ -21,7 +21,7 @@ module.exports = {
 
   fundep: $ =>
     seq(
-      repeat1($.type_variable),
+      repeat($.type_variable),
       $._arrow,
       repeat1($.type_variable)
     ),
