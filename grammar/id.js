@@ -48,12 +48,7 @@ module.exports = {
   // Qualified or unqualified data constructor.
   _qconid: $ => choice($.qualified_constructor, $.constructor),
 
-  // Data constructor
-  _con: $ => $.constructor,
-  // Qualified data constructor
-  _qcon: $ => $._qconid,
-
-  // Data constructor
+ // Data constructor
   _con: $ => $.constructor,
   // Qualified data constructor
   _qcon: $ => $._qconid,
