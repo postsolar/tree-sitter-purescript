@@ -1,0 +1,39 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "purescript",
+      "camelcase": "PureScript",
+      "title": "PureScript",
+      "scope": "source.purescript",
+      "file-types": [
+        "^(purescript|purs)$"
+      ],
+      "injection-regex": "^purescript$",
+      "class-name": "TreeSitterPurescript"
+    }
+  ],
+  "metadata": {
+    "version": "0.3.0",
+    "license": "MIT",
+    "description": "PureScript grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "postsolar",
+        "url": "https://github.com/postsolar"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/postsolar/tree-sitter-purescript"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}

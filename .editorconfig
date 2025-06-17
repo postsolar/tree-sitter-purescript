@@ -1,10 +1,46 @@
-* text eol=lf
+root = true
 
-src/*.json linguist-generated
-src/parser.c linguist-generated
-src/tree_sitter/* linguist-generated
+[*]
+charset = utf-8
 
-bindings/** linguist-generated
-binding.gyp linguist-generated
-setup.py linguist-generated
-Makefile linguist-generated
+[*.{json,toml,yml,gyp}]
+indent_style = space
+indent_size = 2
+
+[*.js]
+indent_style = space
+indent_size = 2
+
+[*.scm]
+indent_style = space
+indent_size = 2
+
+[*.{c,cc,h}]
+indent_style = space
+indent_size = 4
+
+[*.rs]
+indent_style = space
+indent_size = 4
+
+[*.{py,pyi}]
+indent_style = space
+indent_size = 4
+
+[*.swift]
+indent_style = space
+indent_size = 4
+
+[*.go]
+indent_style = tab
+indent_size = 8
+
+[Makefile]
+indent_style = tab
+indent_size = 8
+
+[parser.c]
+indent_size = 2
+
+[{alloc,array,parser}.h]
+indent_size = 2

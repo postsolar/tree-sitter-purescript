@@ -1,3 +1,12 @@
+/**
+ * @file PureScript grammar for tree-sitter
+ * @author postsolar
+ * @license MIT
+ */
+
+/// <reference types="tree-sitter-cli/dsl" />
+// @ts-check
+
 const basic = require('./grammar/basic.js')
 const id = require('./grammar/id.js')
 const rows = require('./grammar/rows_and_records.js')

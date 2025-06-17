@@ -2,13 +2,15 @@
   "targets": [
     {
       "target_name": "tree_sitter_purescript_binding",
+      "dependencies": [
+        "<!(node -p \"require('node-addon-api').targets\"):node_addon_api_except",
+      ],
       "include_dirs": [
-        "<!(node -e \"require('nan')\")",
-        "src"
+        "src",
       ],
       "sources": [
-        "src/parser.c",
         "bindings/node/binding.cc",
+        "src/parser.c",
         "src/scanner.c",
         "src/unicode.h",
       ],
@@ -22,6 +24,18 @@
           ],
         },
       },
+      "conditions": [
+        ["OS!='win'", {
+          "cflags_c": [
+            "-std=c11",
+          ],
+        }, { # OS == "win"
+          "cflags_c": [
+            "/std:c11",
+            "/utf-8",
+          ],
+        }],
+      ],
     }
   ]
 }
