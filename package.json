@@ -14,7 +14,7 @@
     "nan": "^2.18.0"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.21.0"
+    "tree-sitter-cli": "^0.25.0"
   },
   "scripts": {
     "build": "tree-sitter generate --no-bindings",

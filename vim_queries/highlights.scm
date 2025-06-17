@@ -56,7 +56,6 @@
 
 [
   (operator)
-  (constructor_operator)
   (type_operator)
   (all_names)
   "="
