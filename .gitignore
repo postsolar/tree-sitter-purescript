@@ -9,24 +9,27 @@
 parse/
 
 # Rust artifacts
-/Cargo.lock
-/target/
+target/
+Cargo.lock
 
 # Node artifacts
-/build/
-/node_modules/
+build/
+prebuilds/
+node_modules/
+package-lock.json
 
 # Swift artifacts
-/.build/
+.build/
+Package.resolved
+
+# Go artifacts
+_obj/
 
 # Python artifacts
-/dist/
+.venv/
+dist/
 *.egg-info
 *.whl
-
-# Zig artifacts
-/zig-cache/
-/zig-out/
 
 # C artifacts
 *.a
@@ -35,12 +38,23 @@ parse/
 *.dylib
 *.dll
 *.pc
+*.exp
+*.lib
+
+# Zig artifacts
+.zig-cache/
+zig-cache/
+zig-out/
 
 # Example dirs
 /examples/*/
 
 # Grammar volatiles
-dsl.d.ts
 *.wasm
 *.obj
 *.o
+
+# Archives
+*.tar.gz
+*.tgz
+*.zip

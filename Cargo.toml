@@ -1,12 +1,15 @@
 [package]
 name = "tree-sitter-purescript"
-description = "PureScript grammar for the tree-sitter parsing library"
-version = "0.1.0"
-keywords = ["incremental", "parsing", "purescript"]
-categories = ["parsing", "text-editors"]
+description = "PureScript grammar for tree-sitter"
+version = "0.3.0"
+authors = ["postsolar"]
+license = "MIT"
+readme = "README.md"
+keywords = ["incremental", "parsing", "tree-sitter", "purescript"]
+categories = ["parser-implementations", "parsing", "text-editors"]
 repository = "https://github.com/postsolar/tree-sitter-purescript"
 edition = "2021"
-license = "MIT"
+autoexamples = false
 
 build = "bindings/rust/build.rs"
 include = [
@@ -14,13 +17,18 @@ include = [
   "grammar.js",
   "queries/*",
   "src/*",
+  "tree-sitter.json",
+  "LICENSE",
 ]
 
 [lib]
 path = "bindings/rust/lib.rs"
 
 [dependencies]
-tree-sitter = "~0.20.10"
+tree-sitter-language = "0.1"
 
 [build-dependencies]
-cc = "1.0"
+cc = "1.2"
+
+[dev-dependencies]
+tree-sitter = "0.25.6"

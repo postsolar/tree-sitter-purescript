@@ -5,22 +5,25 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tree-sitter-purescript"
 description = "PureScript grammar for tree-sitter"
-version = "0.2.0"
-keywords = ["parsing", "incremental", "purescript"]
+version = "0.3.0"
+keywords = ["incremental", "parsing", "tree-sitter", "purescript"]
 classifiers = [
-  "Development Status :: 4 - Beta",
   "Intended Audience :: Developers",
-  "License :: OSI Approved :: MIT License",
   "Topic :: Software Development :: Compilers",
   "Topic :: Text Processing :: Linguistic",
+  "Typing :: Typed",
 ]
-requires-python = ">=3.8"
-license.file = "LICENSE"
+authors = [{ name = "postsolar" }]
+requires-python = ">=3.10"
+license.text = "MIT"
 readme = "README.md"
 
+[project.urls]
+Homepage = "https://github.com/postsolar/tree-sitter-purescript"
+
 [project.optional-dependencies]
-core = ["tree-sitter~=0.21"]
+core = ["tree-sitter~=0.24"]
 
 [tool.cibuildwheel]
-build = "cp38-*"
+build = "cp310-*"
 build-frontend = "build"
