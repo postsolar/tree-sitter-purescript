@@ -31,16 +31,16 @@ module.exports = {
 // derive (ReadForeign, WriteForeign) via Int
 // derive (Functor F) via SomeType
 
-  deriving_clause: $ => seq(
+  derive_clause: $ => seq(
     'derive',
     optional('newtype'),
     '(',
-    sep1($.comma, $.deriving_class_head),
+    sep1($.comma, $.derive_class_head),
     ')',
     optional(seq('via', $._atype)),
   ),
 
-  deriving_class_head: $ => seq(
+  derive_class_head: $ => seq(
     $.class_name,
     repeat($._atype),
   ),

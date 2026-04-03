@@ -4653,7 +4653,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "deriving_clause"
+            "name": "derive_clause"
           }
         }
       ]
@@ -4728,7 +4728,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "deriving_clause"
+            "name": "derive_clause"
           }
         }
       ]
@@ -5880,7 +5880,7 @@
         ]
       }
     },
-    "deriving_clause": {
+    "derive_clause": {
       "type": "SEQ",
       "members": [
         {
@@ -5908,7 +5908,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "deriving_class_head"
+              "name": "derive_class_head"
             },
             {
               "type": "REPEAT",
@@ -5921,7 +5921,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "deriving_class_head"
+                    "name": "derive_class_head"
                   }
                 ]
               }
@@ -5955,7 +5955,7 @@
         }
       ]
     },
-    "deriving_class_head": {
+    "derive_class_head": {
       "type": "SEQ",
       "members": [
         {

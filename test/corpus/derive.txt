@@ -421,8 +421,8 @@ data Color = Red | Green | Blue
     (constructor)
     (constructor)
     (constructor)
-    (deriving_clause
-      (deriving_class_head
+    (derive_clause
+      (derive_class_head
         (class_name
           (type))))))
 
@@ -441,16 +441,16 @@ data Color = Red | Green | Blue
     (constructor)
     (constructor)
     (constructor)
-    (deriving_clause
-      (deriving_class_head
+    (derive_clause
+      (derive_class_head
         (class_name
           (type)))
       (comma)
-      (deriving_class_head
+      (derive_class_head
         (class_name
           (type)))
       (comma)
-      (deriving_class_head
+      (derive_class_head
         (class_name
           (type))))))
 
@@ -470,16 +470,16 @@ newtype TodoId = TodoId String
       (constructor)
       (type_name
         (type)))
-    (deriving_clause
-      (deriving_class_head
+    (derive_clause
+      (derive_class_head
         (class_name
           (type)))
       (comma)
-      (deriving_class_head
+      (derive_class_head
         (class_name
           (type)))
       (comma)
-      (deriving_class_head
+      (derive_class_head
         (class_name
           (type))))))
 
@@ -499,12 +499,12 @@ newtype TodoId = TodoId Int
       (constructor)
       (type_name
         (type)))
-    (deriving_clause
-      (deriving_class_head
+    (derive_clause
+      (derive_class_head
         (class_name
           (type)))
       (comma)
-      (deriving_class_head
+      (derive_class_head
         (class_name
           (type)))
       (type_name
@@ -530,8 +530,8 @@ data Pair a b = Pair a b
         (type_variable))
       (type_name
         (type_variable)))
-    (deriving_clause
-      (deriving_class_head
+    (derive_clause
+      (derive_class_head
         (class_name
           (type))
         (type_parens
@@ -558,20 +558,20 @@ newtype TodoId = TodoId UUID
       (constructor)
       (type_name
         (type)))
-    (deriving_clause
-      (deriving_class_head
+    (derive_clause
+      (derive_class_head
         (class_name
           (type))))
-    (deriving_clause
-      (deriving_class_head
+    (derive_clause
+      (derive_class_head
         (class_name
           (type)))
       (comma)
-      (deriving_class_head
+      (derive_class_head
         (class_name
           (type)))
       (comma)
-      (deriving_class_head
+      (derive_class_head
         (class_name
           (type))))))
 
@@ -591,8 +591,8 @@ newtype UserId = UserId Int
       (constructor)
       (type_name
         (type)))
-    (deriving_clause
-      (deriving_class_head
+    (derive_clause
+      (derive_class_head
         (class_name
           (qualified_type
             (module)
