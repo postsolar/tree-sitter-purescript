@@ -405,3 +405,195 @@ derive newtype instance eqId :: (Eq a, Eq a) => Eq (Id a)
           (type))
         (type_name
           (type_variable))))))
+
+================================================================================
+attached derive clause (single class)
+================================================================================
+
+data Color = Red | Green | Blue
+  derive (Eq)
+
+--------------------------------------------------------------------------------
+
+(purescript
+  (data
+    name: (type)
+    (constructor)
+    (constructor)
+    (constructor)
+    (deriving_clause
+      (deriving_class_head
+        (class_name
+          (type))))))
+
+================================================================================
+attached derive clause (multiple classes)
+================================================================================
+
+data Color = Red | Green | Blue
+  derive (Eq, Ord, Show)
+
+--------------------------------------------------------------------------------
+
+(purescript
+  (data
+    name: (type)
+    (constructor)
+    (constructor)
+    (constructor)
+    (deriving_clause
+      (deriving_class_head
+        (class_name
+          (type)))
+      (comma)
+      (deriving_class_head
+        (class_name
+          (type)))
+      (comma)
+      (deriving_class_head
+        (class_name
+          (type))))))
+
+================================================================================
+attached derive newtype clause
+================================================================================
+
+newtype TodoId = TodoId String
+  derive newtype (Eq, Ord, Show)
+
+--------------------------------------------------------------------------------
+
+(purescript
+  (newtype
+    name: (type)
+    (newtype_constructor
+      (constructor)
+      (type_name
+        (type)))
+    (deriving_clause
+      (deriving_class_head
+        (class_name
+          (type)))
+      (comma)
+      (deriving_class_head
+        (class_name
+          (type)))
+      (comma)
+      (deriving_class_head
+        (class_name
+          (type))))))
+
+================================================================================
+attached derive via clause
+================================================================================
+
+newtype TodoId = TodoId Int
+  derive (ReadForeign, WriteForeign) via Int
+
+--------------------------------------------------------------------------------
+
+(purescript
+  (newtype
+    name: (type)
+    (newtype_constructor
+      (constructor)
+      (type_name
+        (type)))
+    (deriving_clause
+      (deriving_class_head
+        (class_name
+          (type)))
+      (comma)
+      (deriving_class_head
+        (class_name
+          (type)))
+      (type_name
+        (type)))))
+
+================================================================================
+attached derive clause with class type args
+================================================================================
+
+data Pair a b = Pair a b
+  derive (Functor (Pair a))
+
+--------------------------------------------------------------------------------
+
+(purescript
+  (data
+    name: (type)
+    (type_variable)
+    (type_variable)
+    (constructor)
+    (type_apply
+      (type_name
+        (type_variable))
+      (type_name
+        (type_variable)))
+    (deriving_clause
+      (deriving_class_head
+        (class_name
+          (type))
+        (type_parens
+          (type_apply
+            (type_name
+              (type))
+            (type_name
+              (type_variable))))))))
+
+================================================================================
+multiple attached derive clauses
+================================================================================
+
+newtype TodoId = TodoId UUID
+  derive (Newtype)
+  derive newtype (Eq, Ord, Show)
+
+--------------------------------------------------------------------------------
+
+(purescript
+  (newtype
+    name: (type)
+    (newtype_constructor
+      (constructor)
+      (type_name
+        (type)))
+    (deriving_clause
+      (deriving_class_head
+        (class_name
+          (type))))
+    (deriving_clause
+      (deriving_class_head
+        (class_name
+          (type)))
+      (comma)
+      (deriving_class_head
+        (class_name
+          (type)))
+      (comma)
+      (deriving_class_head
+        (class_name
+          (type))))))
+
+================================================================================
+attached derive clause with qualified class name
+================================================================================
+
+newtype UserId = UserId Int
+  derive newtype (PG.ToPGValue)
+
+--------------------------------------------------------------------------------
+
+(purescript
+  (newtype
+    name: (type)
+    (newtype_constructor
+      (constructor)
+      (type_name
+        (type)))
+    (deriving_clause
+      (deriving_class_head
+        (class_name
+          (qualified_type
+            (module)
+            (type)))))))

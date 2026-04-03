@@ -1,3 +1,5 @@
+const { sep1 } = require('./util.js')
+
 module.exports = {
 // possible types of deriving declarations:
 // derive instance Eq (Id a)
@@ -22,5 +24,25 @@ module.exports = {
     $.type_name,
     repeat($._atype)
   )),
+
+// Attached derive clauses on data/newtype declarations:
+// derive (Eq, Ord, Show)
+// derive newtype (Eq, Ord)
+// derive (ReadForeign, WriteForeign) via Int
+// derive (Functor F) via SomeType
+
+  deriving_clause: $ => seq(
+    'derive',
+    optional('newtype'),
+    '(',
+    sep1($.comma, $.deriving_class_head),
+    ')',
+    optional(seq('via', $._atype)),
+  ),
+
+  deriving_class_head: $ => seq(
+    $.class_name,
+    repeat($._atype),
+  ),
 
 }
