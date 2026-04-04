@@ -16,7 +16,8 @@ module.exports = {
     'data',
     $._simpletype,
     '=',
-    sep1('|', seq($.constructor, repeat($._type)))
+    sep1('|', seq($.constructor, repeat($._type))),
+    repeat($.derive_clause),
   ),
 
   // ----- Newtype ------------------------------------------------------------
@@ -41,6 +42,7 @@ module.exports = {
     $._simpletype,
     '=',
     $.newtype_constructor,
+    repeat($.derive_clause),
   ),
 
 }

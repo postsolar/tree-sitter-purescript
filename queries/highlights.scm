@@ -114,6 +114,7 @@
   "infix"
   "infixl"
   "infixr"
+  "via"
 ] @keyword
 
 (class_instance

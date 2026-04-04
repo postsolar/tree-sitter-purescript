@@ -744,6 +744,10 @@
           "named": true
         },
         {
+          "type": "derive_clause",
+          "named": true
+        },
+        {
           "type": "forall",
           "named": true
         },
@@ -812,6 +816,104 @@
         },
         {
           "type": "signature",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "derive_class_head",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "captured_type_operator",
+          "named": true
+        },
+        {
+          "type": "class_name",
+          "named": true
+        },
+        {
+          "type": "hole",
+          "named": true
+        },
+        {
+          "type": "record_type_literal",
+          "named": true
+        },
+        {
+          "type": "row_type",
+          "named": true
+        },
+        {
+          "type": "type_literal",
+          "named": true
+        },
+        {
+          "type": "type_name",
+          "named": true
+        },
+        {
+          "type": "type_parens",
+          "named": true
+        },
+        {
+          "type": "type_wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "derive_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "captured_type_operator",
+          "named": true
+        },
+        {
+          "type": "comma",
+          "named": true
+        },
+        {
+          "type": "derive_class_head",
+          "named": true
+        },
+        {
+          "type": "hole",
+          "named": true
+        },
+        {
+          "type": "record_type_literal",
+          "named": true
+        },
+        {
+          "type": "row_type",
+          "named": true
+        },
+        {
+          "type": "type_literal",
+          "named": true
+        },
+        {
+          "type": "type_name",
+          "named": true
+        },
+        {
+          "type": "type_parens",
+          "named": true
+        },
+        {
+          "type": "type_wildcard",
           "named": true
         }
       ]
@@ -4727,6 +4829,10 @@
           "named": true
         },
         {
+          "type": "derive_clause",
+          "named": true
+        },
+        {
           "type": "newtype_constructor",
           "named": true
         },
@@ -7151,6 +7257,10 @@
   },
   {
     "type": "type",
+    "named": false
+  },
+  {
+    "type": "via",
     "named": false
   },
   {
